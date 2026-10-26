@@ -1,1 +1,26 @@
 
+name: dev_branch-to-qa_branch
+on:
+  push:
+    branches: [dev_branch]
+permissions:
+  contents: write
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Merge dev_branch_branch into qa_branch
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout qa_branch
+          git merge origin/dev_branch -m "Auto-merge dev_branch into qa_branch"
+          git push origin qa_branch
+      - uses: databricks/setup-cli@main
+      - name: Update qa_branch workspace Git folder
+        run: databricks repos update "/Workspace/Users/ajit.dwivedi@techygeekhub.com/CI-CD-Project-Dev" --branch qa_branch
+        env:
+          DATABRICKS_HOST: ${{ secrets.TEST_DBX_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.TEST_DBX_TOKEN }}
