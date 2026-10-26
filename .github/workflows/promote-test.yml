@@ -5,10 +5,18 @@ on:
 permissions:
   contents: write
 jobs:
-  test:
+    test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: qa_branch
+          fetch-depth: 0
+      - name: Combine dev code with QA tests (not pushed)
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git merge origin/dev_branch -m "test merge"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
