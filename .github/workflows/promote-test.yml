@@ -20,7 +20,7 @@ jobs:
           git push origin qa_branch
       - uses: databricks/setup-cli@main
       - name: Update QA workspace Git folder
-        run: databricks repos update "./CI-CD-Project-QA" --branch qa_branch
+        run: databricks repos update "/Workspace/Users/ajit.dwivedi@techygeekhub.com/CI-CD-Project-QA" --branch qa_branch
         env:
           DATABRICKS_HOST: ${{ secrets.TEST_DBX_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.TEST_DBX_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
             "tasks": [{
               "task_key": "tests",
               "notebook_task": {
-                "notebook_path": "./CI-CD-Project-QA/tests/run_tests"
+                "notebook_path": "/Workspace/Users/ajit.dwivedi@techygeekhub.com/CI-CD-Project-QA/tests/run_tests"
               }
             }]
           }'
@@ -61,7 +61,7 @@ jobs:
           git push origin main
       - uses: databricks/setup-cli@main
       - name: Update Prod workspace Git folder
-        run: databricks repos update "./CI-CD-Project-Prod" --branch main
+        run: databricks repos update "/Workspace/Users/ajit.dwivedi@techygeekhub.com/CI-CD-Project-Prod" --branch main
         env:
           DATABRICKS_HOST: ${{ secrets.TEST_DBX_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.TEST_DBX_TOKEN }}
