@@ -37,7 +37,7 @@ jobs:
             "tasks": [{
               "task_key": "tests",
               "notebook_task": {
-              "notebook_path": ""notebook_path": "/Workspace/Users/ajit.dwivedi@techygeekhub.com/CI-CD-Project-QA/tests/test_transformations"
+              "notebook_path": "/Workspace/Users/ajit.dwivedi@techygeekhub.com/CI-CD-Project-QA/tests/test_transformations"
               }
             }]
           }'
